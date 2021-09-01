@@ -125,6 +125,8 @@ public class LevelManager : MonoBehaviour
             {
                 matches.Add(selected[0]);
                 matches.Add(selected[1]);
+                items[selected[0]].HasBeenMatched();
+                items[selected[1]].HasBeenMatched();
 
                 if(matches.Count >= row * column)
                 {

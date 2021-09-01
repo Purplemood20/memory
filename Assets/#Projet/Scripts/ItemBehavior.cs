@@ -47,6 +47,11 @@ public class ItemBehavior : MonoBehaviour
         animator.SetBool("ItemSelected", selected);
     }
 
+    public void HasBeenMatched()
+    {
+        animator.SetBool("RightItem", true);
+    }
+
 
 
 

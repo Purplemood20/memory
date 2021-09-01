@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;          // using pour unity event
 
 public class LevelManager : MonoBehaviour
 {
@@ -25,6 +26,8 @@ public class LevelManager : MonoBehaviour
     public List<int> matches = new List<int>();  // pas besoin de les mettre en public juste pour voir qu elle se remplissent
 
     private Dictionary<int, Material> itemMaterial = new Dictionary<int, Material>();
+
+    public UnityEvent WhenPlayerWins;    // creation unity event
 
     // Start is called before the first frame update
     void Start()
@@ -85,9 +88,16 @@ public class LevelManager : MonoBehaviour
         ResetMaterial(id1);
         ResetMaterial(id2);
         resetOnGoing = false;
-    }                                         
-                       
-    
+    }
+    private IEnumerator Win()
+    {
+        
+        yield return new WaitForSeconds(timeBeforeReset);
+        WhenPlayerWins?.Invoke();                             // "?" verifier si "WhenPlayerWins" n'est pas vide -> on evite de faire planter avec le Invoke
+        
+    }
+
+
     public void RevealMaterial(int id)
     {
         if (resetOnGoing == false && !selected.Contains(id) && !matches.Contains(id))
@@ -95,12 +105,15 @@ public class LevelManager : MonoBehaviour
             selected.Add(id);
             Material material = itemMaterial[id];
             items[id].GetComponent<Renderer>().material = material;
+            items[id].HasBeenSelected(true);
         }   
     }
 
     private void ResetMaterial(int id)
     {
         items[id].GetComponent<Renderer>().material = defaultMaterial;
+        items[id].HasBeenSelected(false);
+        
     }
 
     // Update is called once per frame
@@ -112,10 +125,19 @@ public class LevelManager : MonoBehaviour
             {
                 matches.Add(selected[0]);
                 matches.Add(selected[1]);
+
+                if(matches.Count >= row * column)
+                {
+                    StartCoroutine(Win());                   
+                                                // co routine2
+                }
+
             }
             else
             {
                 StartCoroutine(ResetMaterials(selected[0], selected[1]));
+                
+
             }
             selected.Clear();
         }

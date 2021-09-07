@@ -5,8 +5,8 @@ using UnityEngine.Events;          // using pour unity event
 
 public class LevelManager : MonoBehaviour
 {
-    public int row = 3;
-    public int column = 4;
+    private int row;  
+    private int column; 
 
     public float gapRow = 1.5f;
     public float gapColumn = 1.5f;
@@ -35,7 +35,8 @@ public class LevelManager : MonoBehaviour
 
     void Start()
     {
-        
+        row = PlayerPrefs.GetInt("row", 3); // 3 est une valeur par defaut
+        column = PlayerPrefs.GetInt("column", 4);
         items = new ItemBehavior[row * column];
         int index = 0;
         for(int x=0 ; x<column; x++)
@@ -55,31 +56,7 @@ public class LevelManager : MonoBehaviour
             }
         }
         GiveMaterials();
-        
-        if (PlayerPrefs.GetString("true") == "true")
-        {
-            column = 3;
-            items = new ItemBehavior[row * column];
-            int index1 = 0;
-            for (int x = 0; x < column; x++)
-            {
-                for (int z = 0; z < row; z++)
-                {
-                    Vector3 position = new Vector3(x * gapColumn, 0, z * gapRow);
-                    GameObject item = Instantiate(itemPrefab, position, Quaternion.identity);
-                    item.GetComponent<Renderer>().material = defaultMaterial;
-
-                    items[index] = item.GetComponent<ItemBehavior>();
-
-                    items[index].id = index;
-                    items[index].manager = this;
-
-                    index++;
-                }
-            }
-
-            GiveMaterials();
-        }
+               
     }
 
     

@@ -5,22 +5,37 @@ using UnityEngine.SceneManagement;
 
 public class SceneChanger : MonoBehaviour
 {
-    public bool easyMode;
+    
     public void Change(string sceneName)
     {
-        if (sceneName == "SampleScene")
+        SceneManager.LoadScene(sceneName);
+    }
+
+    public void LoadEndScene(int level)
+    {
+        int row, column;
+        switch (level)
         {
-            SceneManager.LoadScene("SampleScene"); // il passe à  la sample scene 
+            case 1: 
+                row = 2; 
+                column = 3; 
+                break; 
+            case 2:  
+                row = 3; 
+                column = 4; 
+                break; 
+            default:  
+                row = 4; 
+                column = 5; 
+                break; 
         }
-        if(sceneName=="EasyScene")
-        {
-            easyMode = true;
-
-            SceneManager.LoadScene("SampleScene");
-        }
-        
-
-
+        PlayerPrefs.SetInt("row", row);
+        PlayerPrefs.SetInt("col", column);
+        SceneManager.LoadScene("SampleScene");
+    }
+    public void Exit()
+    {
+        Application.Quit();
     }
     
 }

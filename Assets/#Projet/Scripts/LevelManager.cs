@@ -7,6 +7,7 @@ public class LevelManager : MonoBehaviour
 {
     public int row = 3;
     public int column = 4;
+
     public float gapRow = 1.5f;
     public float gapColumn = 1.5f;
 
@@ -30,8 +31,11 @@ public class LevelManager : MonoBehaviour
     public UnityEvent WhenPlayerWins;    // creation unity event
 
     // Start is called before the first frame update
+
+
     void Start()
     {
+        
         items = new ItemBehavior[row * column];
         int index = 0;
         for(int x=0 ; x<column; x++)
@@ -50,8 +54,35 @@ public class LevelManager : MonoBehaviour
                 index++;
             }
         }
-        GiveMaterials();            
+        GiveMaterials();
+        
+        if (PlayerPrefs.GetString("true") == "true")
+        {
+            column = 3;
+            items = new ItemBehavior[row * column];
+            int index1 = 0;
+            for (int x = 0; x < column; x++)
+            {
+                for (int z = 0; z < row; z++)
+                {
+                    Vector3 position = new Vector3(x * gapColumn, 0, z * gapRow);
+                    GameObject item = Instantiate(itemPrefab, position, Quaternion.identity);
+                    item.GetComponent<Renderer>().material = defaultMaterial;
+
+                    items[index] = item.GetComponent<ItemBehavior>();
+
+                    items[index].id = index;
+                    items[index].manager = this;
+
+                    index++;
+                }
+            }
+
+            GiveMaterials();
+        }
     }
+
+    
 
     private void GiveMaterials()
     {

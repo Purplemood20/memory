@@ -6,7 +6,9 @@ using UnityEngine.Events;          // using pour unity event
 public class LevelManager : MonoBehaviour
 {
     private int row;  
-    private int column; 
+    private int column;
+
+    private float seconds;
 
     public float gapRow = 1.5f;
     public float gapColumn = 1.5f;
@@ -127,6 +129,7 @@ public class LevelManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        seconds += Time.deltaTime;
         if (selected.Count == 2)
         {
             if (itemMaterial[selected[0]] == itemMaterial[selected[1]])
@@ -141,6 +144,7 @@ public class LevelManager : MonoBehaviour
                     StartCoroutine(Win());                   
                                                 // co routine2
                 }
+                PlayerPrefs.SetFloat("seconds", seconds);
 
             }
             else

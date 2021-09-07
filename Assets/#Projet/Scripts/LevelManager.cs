@@ -141,10 +141,11 @@ public class LevelManager : MonoBehaviour
 
                 if(matches.Count >= row * column)
                 {
+                    PlayerPrefs.SetFloat("seconds", seconds);
                     StartCoroutine(Win());                   
                                                 // co routine2
                 }
-                PlayerPrefs.SetFloat("seconds", seconds);
+                
 
             }
             else

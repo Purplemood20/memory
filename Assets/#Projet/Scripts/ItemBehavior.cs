@@ -8,7 +8,7 @@ public class ItemBehavior : MonoBehaviour
     public LevelManager manager;
     public bool mouseOver = false;
 
-    private Animator animator;
+    public Animator animator;
 
     // Start is called before the first frame update
     void Start()

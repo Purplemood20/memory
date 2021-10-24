@@ -112,6 +112,7 @@ MonoBehaviour:
   id: -1
   manager: {fileID: 0}
   mouseOver: 0
+  animator: {fileID: -6410691642097328940}
 --- !u!95 &-6410691642097328940
 Animator:
   serializedVersion: 3

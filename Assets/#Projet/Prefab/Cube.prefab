@@ -113,6 +113,8 @@ MonoBehaviour:
   manager: {fileID: 0}
   mouseOver: 0
   animator: {fileID: -6410691642097328940}
+  source: {fileID: 4082514544011636970, guid: a8c7129e0ab253f44932a2ba154f5fab, type: 3}
+  clip: {fileID: 8300000, guid: eb45e72d60eabb7438ef0092e1730c78, type: 3}
 --- !u!95 &-6410691642097328940
 Animator:
   serializedVersion: 3

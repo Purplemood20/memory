@@ -10,6 +10,9 @@ public class ItemBehavior : MonoBehaviour
 
     public Animator animator;
 
+    public AudioSource source;
+    public AudioClip clip;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -45,6 +48,7 @@ public class ItemBehavior : MonoBehaviour
     public void HasBeenSelected(bool selected)
     {
         animator.SetBool("ItemSelected", selected);
+        source.PlayOneShot(clip);
     }
 
     public void HasBeenMatched()

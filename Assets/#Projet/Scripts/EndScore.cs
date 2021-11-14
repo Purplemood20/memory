@@ -18,11 +18,11 @@ public class EndScore : MonoBehaviour
         {
             text.text = "Really??????\n " + seconds_str + " sec";
         }
-        if (seconds < 15)
+        if (seconds <= 15)
         {
             text.text = "CROWN FLOWERS!\n " + seconds_str + " sec";
         }
-        else
+        if (seconds > 15 && seconds <= 20)
         {
             text.text = "... not bad\n " + seconds_str + " sec";
         }
